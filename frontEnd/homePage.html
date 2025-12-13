@@ -37,6 +37,26 @@
     <section id="home" class="hero">
       <div class="particles"></div>
       <div class="hero-content">
+        <!-- Terminal Animation -->
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="terminal-button red"></span>
+              <span class="terminal-button yellow"></span>
+              <span class="terminal-button green"></span>
+            </div>
+            <div class="terminal-title">terminal</div>
+          </div>
+
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-text"></span>
+              <span class="terminal-cursor">|</span>
+            </div>
+          </div>
+        </div>
+
         <h1>Ray Lui | Software Engineer</h1>
         <p class="subtitle">
           <span class="typing-text">Saving the World.</span>
@@ -92,35 +112,60 @@
     <section id="experience">
       <div class="container">
         <h2>My Experience</h2>
-        <div class="services-grid">
-          <div class="service-card">
-            <h3>Software Development Engineer Intern @ LLNL</h3>
-            <p>
-              Full Stack Development using Java, SpringBoot, Angular,
-              Javascript/Typescript, HTML, and Oracle SQL
-            </p>
-            <div class="company-logo">
-              <img
-                src="images/lawrence_livermore_national_laboratory_logo.jpeg"
-                alt="LLNL Logo"
-              />
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">June 2025 - December 2025</div>
+            <div class="timeline-content">
+              <div class="service-card">
+                <h3>Software Development Engineer Intern @ LLNL</h3>
+                <p>
+                  Full Stack Development using Java, SpringBoot, Angular,
+                  Javascript/Typescript, HTML, and Oracle SQL
+                </p>
+                <div class="company-logo">
+                  <img
+                    src="images/lawrence_livermore_national_laboratory_logo.jpeg"
+                    alt="LLNL Logo"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          <div class="service-card">
-            <h3>Software Engineer Intern @ County of SLO</h3>
-            <p>
-              Full Stack Development using Python, Micorsoft Sharepoint,
-              Micorsoft PowerAutomate, SQL
-            </p>
-            <div class="company-logo">
-              <img src="images/countyOfSloLogo.jpeg" alt="LLNL Logo" />
+
+          <div class="timeline-item">
+            <div class="timeline-date">Nov 2023 - Feb 2024</div>
+            <div class="timeline-content">
+              <div class="service-card">
+                <h3>Software Engineer Intern @ Conspire Commerce</h3>
+                <p>
+                  FrontEnd Development using React, Javascript, HTML, and CSS
+                </p>
+                <div class="company-logo">
+                  <img
+                    src="images/conspirecommerce_logo.jpeg"
+                    alt="Conspire Commerce Logo"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          <div class="service-card">
-            <h3>Software Engineer Intern @ Conspire Commerce</h3>
-            <p>FrontEnd Development using React, Javascript, HTML, and CSS</p>
-            <div class="company-logo">
-              <img src="images/conspirecommerce_logo.jpeg" alt="LLNL Logo" />
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Jan 2023 - May 2025</div>
+          <div class="timeline-content">
+            <div class="service-card">
+              <h3>Software Engineer Intern @ County of SLO</h3>
+              <p>
+                Full Stack Development using Python, Microsoft Sharepoint,
+                Microsoft PowerAutomate, SQL
+              </p>
+              <div class="company-logo">
+                <img
+                  src="images/countyOfSloLogo.jpeg"
+                  alt="County of SLO Logo"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -377,6 +422,51 @@
           document.body.style.overflow = 'auto'
         }
       })
+
+      // Terminal typing animation
+      const terminalText = document.querySelector('.terminal-text')
+      const commands = [
+        'whoami',
+        'Ray Lui - Software Engineer',
+        'cat skills.txt',
+        'Full-Stack Developer | Problem Solver',
+      ]
+
+      let commandIndex = 0
+      let charIndex = 0
+      let isDeleting = false
+      let isPaused = false
+
+      function typeTerminal() {
+        const currentCommand = commands[commandIndex]
+
+        if (isPaused) {
+          setTimeout(typeTerminal, 1500)
+          isPaused = false
+          return
+        }
+
+        if (!isDeleting && charIndex <= currentCommand.length) {
+          terminalText.textContent = currentCommand.substring(0, charIndex)
+          charIndex++
+          setTimeout(typeTerminal, 80)
+        } else if (isDeleting && charIndex >= 0) {
+          terminalText.textContent = currentCommand.substring(0, charIndex)
+          charIndex--
+          setTimeout(typeTerminal, 40)
+        } else if (!isDeleting && charIndex > currentCommand.length) {
+          isPaused = true
+          isDeleting = true
+          setTimeout(typeTerminal, 1500)
+        } else if (isDeleting && charIndex < 0) {
+          isDeleting = false
+          commandIndex = (commandIndex + 1) % commands.length
+          setTimeout(typeTerminal, 500)
+        }
+      }
+
+      // Start terminal animation after a short delay
+      setTimeout(typeTerminal, 500)
     </script>
   </body>
 </html>
