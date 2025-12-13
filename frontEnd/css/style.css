@@ -13,6 +13,7 @@ body {
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
+  background: #0f172a; /* Dark base background */
 }
 
 .container {
@@ -26,18 +27,70 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 h2 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: #1e293b;
+  color: #ffffff;
   text-align: center;
 }
 
 /* ===========================
-   LOGO
-   =========================== */
+     ANIMATED BACKGROUND
+     =========================== */
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 20% 50%,
+      rgba(99, 102, 241, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(139, 92, 246, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 20%,
+      rgba(59, 130, 246, 0.1) 0%,
+      transparent 50%
+    );
+  animation: backgroundShift 15s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes backgroundShift {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+  33% {
+    opacity: 0.8;
+    transform: scale(1.1) translate(5%, -5%);
+  }
+  66% {
+    opacity: 0.9;
+    transform: scale(1.05) translate(-5%, 5%);
+  }
+}
+
+/* Ensure content is above background */
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================
+     LOGO
+     =========================== */
 
 /* Logo in top left */
 .logo-container {
@@ -59,8 +112,8 @@ h2 {
 }
 
 /* ===========================
-   NAVIGATION - SMALLER PILL STYLE
-   =========================== */
+     NAVIGATION - SMALLER PILL STYLE
+     =========================== */
 nav {
   position: fixed;
   top: 1.5rem;
@@ -74,12 +127,12 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  background: rgba(30, 41, 59, 0.8);
+  background: rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 0.4rem;
   border-radius: 100px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -108,7 +161,7 @@ nav {
   padding: 0.5rem 1.2rem;
   border-radius: 100px;
   text-decoration: none;
-  color: #1e293b;
+  color: #0f172a;
   background: rgba(255, 255, 255, 0.9);
   font-weight: 600;
   font-size: 0.85rem;
@@ -123,10 +176,10 @@ nav {
 }
 
 /* ===========================
-   HERO SECTION
-   =========================== */
+     HERO SECTION
+     =========================== */
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #1e293b 100%);
+  background: transparent;
   color: white;
   text-align: center;
   flex-direction: column;
@@ -156,8 +209,8 @@ nav {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  animation: float 6s infinite ease-in-out; /* Changed from 15s to 6s */
+  background: rgba(99, 102, 241, 0.15);
+  animation: float 6s infinite ease-in-out;
 }
 
 .particles::before {
@@ -169,9 +222,10 @@ nav {
 .particles::after {
   bottom: -100px;
   right: -100px;
-  animation-delay: 3s; /* Changed from 7s to 3s */
+  animation-delay: 3s;
   width: 400px;
   height: 400px;
+  background: rgba(139, 92, 246, 0.15);
 }
 
 @keyframes float {
@@ -229,13 +283,13 @@ nav {
     width: 0;
   }
   30% {
-    width: 17ch; /* Takes 3 seconds to type (slower ✅) */
+    width: 17ch;
   }
   70% {
-    width: 17ch; /* Holds for 4 seconds */
+    width: 17ch;
   }
   85% {
-    width: 0; /* Deletes in 1.5 seconds */
+    width: 0;
   }
   100% {
     width: 0;
@@ -253,11 +307,11 @@ nav {
 }
 
 /* ===========================
-   ABOUT SECTION
-   =========================== */
+     ABOUT SECTION
+     =========================== */
 .about {
-  background: linear-gradient(135deg, #667eea 0%, #1e293b 100%);
-  border-top: 4px solid #667eea;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .about h2 {
@@ -273,7 +327,7 @@ nav {
 
 .about-text p {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9); /* White text */
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1rem;
 }
 
@@ -285,20 +339,21 @@ nav {
 }
 
 .skill-tag {
-  background: #2563eb;
+  background: rgba(99, 102, 241, 0.3);
   color: white;
   padding: 0.5rem 1.2rem;
   border-radius: 25px;
   font-size: 0.9rem;
   font-weight: 500;
+  border: 1px solid rgba(99, 102, 241, 0.5);
 }
 
 .about-image {
   width: 100%;
-  height: 600px; /* Nice and tall! */
+  height: 600px;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
 }
 
 .about-image img {
@@ -310,12 +365,12 @@ nav {
 }
 
 /* ===========================
-   EXPERIENCE SECTION
-   =========================== */
+     EXPERIENCE SECTION
+     =========================== */
 
 #experience {
-  background: linear-gradient(135deg, #667eea 0%, #1e293b 100%);
-  border-top: 4px solid #667eea;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #experience h2 {
@@ -330,26 +385,29 @@ nav {
 }
 
 .service-card {
-  background: white;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .service-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(99, 102, 241, 0.5);
 }
 
 .service-card h3 {
-  color: #2563eb;
+  color: #818cf8;
   margin-bottom: 1rem;
   font-size: 1.4rem;
 }
 
 .service-card p {
-  color: #475569; /* Make sure text is dark on white cards */
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .company-logo {
@@ -372,12 +430,12 @@ nav {
 }
 
 /* ===========================
-   PROJECTS SECTION
-   =========================== */
+     PROJECTS SECTION
+     =========================== */
 
 #projects {
-  background: linear-gradient(135deg, #667eea 0%, #1e293b 100%);
-  border-top: 4px solid #667eea;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #projects h2 {
@@ -386,7 +444,7 @@ nav {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-columns: repeat(2, 1fr);
   gap: 2.5rem;
   margin-top: 3rem;
 }
@@ -399,21 +457,28 @@ nav {
 }
 
 .project-card {
-  background: white;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .project-card:hover {
   transform: scale(1.03);
+  border-color: rgba(99, 102, 241, 0.5);
 }
 
 .project-image {
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.3) 0%,
+    rgba(118, 75, 162, 0.3) 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -426,19 +491,19 @@ nav {
 }
 
 .project-content h3 {
-  color: #1e293b;
+  color: #ffffff;
   margin-bottom: 0.8rem;
 }
 
 .project-content p {
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
 }
 
 .project-video {
   width: 100%;
   height: 350px;
-  background: #1e293b;
+  background: #0f172a;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -449,12 +514,12 @@ nav {
 .project-video video {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Changed from 'cover' to 'contain' */
+  object-fit: contain;
 }
 
 /* ===========================
-   PDF MODAL
-   =========================== */
+     PDF MODAL
+     =========================== */
 
 .pdf-thumbnail {
   position: relative;
@@ -464,24 +529,11 @@ nav {
 .pdf-thumbnail img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s;
+  background: #0f172a;
 }
 
-.pdf-thumbnail {
-  position: relative;
-  overflow: hidden;
-}
-
-.pdf-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Changed from 'cover' to 'contain' */
-  transition: transform 0.3s;
-  background: #1e293b; /* Optional: adds background color for any empty space */
-}
-
-/* ADD THIS NEW CODE HERE: */
 .pdf-hover-overlay {
   position: absolute;
   top: 0;
@@ -504,10 +556,9 @@ nav {
   transform: scale(1.05);
 }
 
-/* THEN UPDATE YOUR .view-pdf-btn TO THIS: */
 .view-pdf-btn {
   background: rgba(255, 255, 255, 0.95);
-  color: #1e293b;
+  color: #0f172a;
   border: none;
   padding: 1rem 2rem;
   border-radius: 50px;
@@ -526,29 +577,6 @@ nav {
 .view-pdf-btn:hover {
   background: white;
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* .view-pdf-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.95);
-  color: #1e293b;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-} */
-
-.view-pdf-btn:hover {
-  background: white;
-  transform: translate(-50%, -50%) scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -637,20 +665,13 @@ nav {
 }
 
 /* ===========================
-   STATS SECTION
-   =========================== */
-.stats {
-  background: #1e293b;
-  color: white;
-}
-
-/* ===========================
-   CONTACT SECTION
-   =========================== */
+     CONTACT SECTION
+     =========================== */
 .contact {
-  background: linear-gradient(135deg, #667eea 0%, #1e293b 100%);
+  background: transparent;
   color: white;
   text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact h2 {
@@ -683,8 +704,8 @@ nav {
 }
 
 /* ===========================
-   ANIMATIONS
-   =========================== */
+     ANIMATIONS
+     =========================== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -697,8 +718,8 @@ nav {
 }
 
 /* ===========================
-   RESPONSIVE STYLES
-   =========================== */
+     RESPONSIVE STYLES
+     =========================== */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.5rem;
