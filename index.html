@@ -241,7 +241,7 @@
               <!-- Mobile button - BELOW content -->
               <button
                 class="view-pdf-btn mobile-btn"
-                data-pdf="assets/Jigsaw.pdf"
+                data-pdf="assets/PolyProperties.pdf"
               >
                 📄 View Report
               </button>
@@ -288,7 +288,7 @@
               <!-- Mobile button - BELOW content -->
               <button
                 class="view-pdf-btn mobile-btn"
-                data-pdf="assets/Jigsaw.pdf"
+                data-pdf="assets/P2DMM.pdf"
               >
                 📄 View Report
               </button>
@@ -505,6 +505,31 @@
 
       // Start terminal animation after a short delay
       setTimeout(typeTerminal, 500)
+
+      // Force video autoplay on mobile
+      if (isMobile()) {
+        document.querySelectorAll('video').forEach((video) => {
+          video.muted = true
+          video.playsInline = true
+
+          // Try to play immediately
+          const playPromise = video.play()
+
+          if (playPromise !== undefined) {
+            playPromise.catch((error) => {
+              // If autoplay fails, play on first user interaction
+              document.addEventListener(
+                'touchstart',
+                function playOnTouch() {
+                  video.play()
+                  document.removeEventListener('touchstart', playOnTouch)
+                },
+                { once: true }
+              )
+            })
+          }
+        })
+      }
     </script>
   </body>
 </html>
