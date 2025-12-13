@@ -741,6 +741,12 @@ nav {
   background: #0f172a;
 }
 
+.pdf-thumbnail video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .pdf-hover-overlay {
   position: absolute;
   top: 0;
@@ -873,20 +879,31 @@ nav {
 
 /* Disable hover overlay on mobile/touch devices */
 @media (hover: none) and (pointer: coarse) {
+  /* Hide the hover overlay completely on mobile */
   .pdf-hover-overlay {
-    display: none;
+    display: none !important;
   }
-  
-  .view-pdf-btn {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-  
-  .pdf-thumbnail:hover img {
+
+  /* Remove hover effects */
+  .pdf-thumbnail:hover img,
+  .pdf-thumbnail:hover video {
     transform: none;
+  }
+}
+
+/* Mobile-only button styling */
+.view-pdf-btn.mobile-btn {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .view-pdf-btn.mobile-btn {
+    display: inline-block;
+    position: static;
+    margin-top: 1rem;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
