@@ -387,14 +387,28 @@
       const pdfFrame = document.getElementById('pdfFrame')
       const closePdfModal = document.querySelector('.close-pdf-modal')
 
+      // Detect mobile device
+      function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      }
+
       // Open PDF modal
       document.querySelectorAll('.view-pdf-btn').forEach((btn) => {
         btn.addEventListener('click', function (e) {
           e.stopPropagation() // Prevent card click
           const pdfSrc = this.getAttribute('data-pdf')
-          pdfFrame.src = pdfSrc
-          pdfModal.style.display = 'block'
-          document.body.style.overflow = 'hidden' // Prevent background scrolling
+
+          // On mobile, open in new tab instead of modal
+          if (isMobile()) {
+            window.open(pdfSrc, '_blank')
+          } else {
+            // Desktop: show in modal
+            pdfFrame.src = pdfSrc
+            pdfModal.style.display = 'block'
+            document.body.style.overflow = 'hidden' // Prevent background scrolling
+          }
         })
       })
 
