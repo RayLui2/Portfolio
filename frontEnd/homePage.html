@@ -133,7 +133,17 @@
         <h2>Featured Projects</h2>
         <div class="projects-grid">
           <div class="project-card">
-            <div class="project-image">🚀</div>
+            <div class="project-video pdf-thumbnail">
+              <video autoplay loop muted playsinline>
+                <source src="videos/JigsawDemo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="pdf-hover-overlay">
+                <button class="view-pdf-btn" data-pdf="assets/Jigsaw.pdf">
+                  📄 View Report
+                </button>
+              </div>
+            </div>
             <div class="project-content">
               <h3>Jigsaw Puzzle Application</h3>
               <p>
@@ -144,40 +154,82 @@
             </div>
           </div>
           <div class="project-card">
-            <div class="project-image">📊</div>
+            <div class="project-video pdf-thumbnail">
+              <video autoplay loop muted playsinline>
+                <source src="videos/PolyPropertiesDemo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="pdf-hover-overlay">
+                <button
+                  class="view-pdf-btn"
+                  data-pdf="assets/PolyProperties.pdf"
+                >
+                  📄 View Report
+                </button>
+              </div>
+            </div>
             <div class="project-content">
               <h3>Poly Properties - Online Leasing Platform</h3>
               <p>
-                Real-time data visualization platform processing millions of
-                events. Features include custom reports, alerts, and team
-                collaboration tools.
+                Poly Properties is a website application developed to help
+                college students at Cal Poly San Luis Obispo make decisions and
+                gain more knowledge about different housing listings in San Luis
+                Obispo. It provides ratings and reviews for local housing
+                listings, enabling students to evaluate properties before
+                signing a lease and deciding to live at a property. Students
+                will be able to leave reviews based on personal experience and
+                any feedback on the property itself or the landlord to help
+                other students in the future gain more knowledge about the
+                property they are looking to rent/live at. This can also be used
+                to landlords’ benefit and see how they can improve their
+                property.
               </p>
             </div>
           </div>
           <div class="project-card">
             <div class="project-video">
-                <video autoplay loop muted playsinline>
-                  <source src="videos/ChatBox.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+              <video autoplay loop muted playsinline>
+                <source src="videos/ChatBox.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
             <div class="project-content">
               <h3>Interactive Chat Box</h3>
               <p>
-                Intelligent chatbot leveraging natural language processing to
-                automate customer support. Reduced response time by 70% and
-                improved satisfaction.
+                Here is an Interactive Chat Box that is based on a client and a
+                server hosted on sockets. This program was built in C, and
+                allows a user on one machine to send and receive messages from
+                another user on another machine. One user acts as a host, who
+                hosts a server with a specific address, and the other acts as a
+                client who can connect using the host’s address.
               </p>
             </div>
           </div>
           <div class="project-card">
-            <div class="project-image">🤖</div>
+            <div class="project-image pdf-thumbnail">
+              <img src="images/DMM.png" alt="Digital MultiMeter" />
+              <div class="pdf-hover-overlay">
+                <button class="view-pdf-btn" data-pdf="assets/P2DMM.pdf">
+                  📄 View Report
+                </button>
+              </div>
+            </div>
             <div class="project-content">
               <h3>Digital MultiMeter</h3>
               <p>
-                Intelligent chatbot leveraging natural language processing to
-                automate customer support. Reduced response time by 70% and
-                improved satisfaction.
+                The STM32L476 NUCLEO-L467RG Development Board was programmed to
+                function as a digital multimeter in this project. The digital
+                multimeter takes an input signal, AC or DC, as an input, and can
+                measure frequency, peak-to-peak voltage, and true root mean
+                square voltage for AC signals, and can measure DC voltage for DC
+                signals. For both AC and DC signals, the digital multimeter is
+                able to measure voltages from 0 - 3.3 V. As for the AC signals
+                as inputs, the digital multimeter is able to read and measure
+                sine, triangle, sawtooth, and square waves. The measured values
+                for AC and DC signals are displayed neatly in the terminal
+                through USART, with bar graphs for each voltage measurement. The
+                digital multimeter is accurate within 10 mV for voltage
+                measurements, and 1 Hz for frequency measurements
               </p>
             </div>
           </div>
@@ -210,6 +262,14 @@
         </div>
       </div>
     </section>
+
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="pdf-modal">
+      <div class="pdf-modal-content">
+        <span class="close-pdf-modal">&times;</span>
+        <iframe id="pdfFrame" src="" frameborder="0"></iframe>
+      </div>
+    </div>
 
     <!-- JavaScript for smooth scrolling and animations -->
     <script>
@@ -281,6 +341,47 @@
             video.pause()
             video.currentTime = 0
           })
+        }
+      })
+
+      // PDF modal functionality
+      const pdfModal = document.getElementById('pdfModal')
+      const pdfFrame = document.getElementById('pdfFrame')
+      const closePdfModal = document.querySelector('.close-pdf-modal')
+
+      // Open PDF modal
+      document.querySelectorAll('.view-pdf-btn').forEach((btn) => {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation() // Prevent card click
+          const pdfSrc = this.getAttribute('data-pdf')
+          pdfFrame.src = pdfSrc
+          pdfModal.style.display = 'block'
+          document.body.style.overflow = 'hidden' // Prevent background scrolling
+        })
+      })
+
+      // Close modal with X button
+      closePdfModal.addEventListener('click', () => {
+        pdfModal.style.display = 'none'
+        pdfFrame.src = ''
+        document.body.style.overflow = 'auto'
+      })
+
+      // Close modal when clicking outside
+      pdfModal.addEventListener('click', (e) => {
+        if (e.target === pdfModal) {
+          pdfModal.style.display = 'none'
+          pdfFrame.src = ''
+          document.body.style.overflow = 'auto'
+        }
+      })
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && pdfModal.style.display === 'block') {
+          pdfModal.style.display = 'none'
+          pdfFrame.src = ''
+          document.body.style.overflow = 'auto'
         }
       })
     </script>
