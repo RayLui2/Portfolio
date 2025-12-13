@@ -135,7 +135,7 @@
           <div class="project-card">
             <div class="project-image">🚀</div>
             <div class="project-content">
-              <h3>E-Commerce Platform</h3>
+              <h3>Jigsaw Puzzle Application</h3>
               <p>
                 A full-featured online marketplace with real-time inventory,
                 secure payments, and admin dashboard. Built with React, Node.js,
@@ -146,7 +146,7 @@
           <div class="project-card">
             <div class="project-image">📊</div>
             <div class="project-content">
-              <h3>Analytics Dashboard</h3>
+              <h3>Poly Properties - Online Leasing Platform</h3>
               <p>
                 Real-time data visualization platform processing millions of
                 events. Features include custom reports, alerts, and team
@@ -155,9 +155,25 @@
             </div>
           </div>
           <div class="project-card">
+            <div class="project-video">
+                <video autoplay loop muted playsinline>
+                  <source src="videos/ChatBox.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            <div class="project-content">
+              <h3>Interactive Chat Box</h3>
+              <p>
+                Intelligent chatbot leveraging natural language processing to
+                automate customer support. Reduced response time by 70% and
+                improved satisfaction.
+              </p>
+            </div>
+          </div>
+          <div class="project-card">
             <div class="project-image">🤖</div>
             <div class="project-content">
-              <h3>AI Assistant App</h3>
+              <h3>Digital MultiMeter</h3>
               <p>
                 Intelligent chatbot leveraging natural language processing to
                 automate customer support. Reduced response time by 70% and
@@ -252,6 +268,20 @@
             pill.classList.add('active')
           }
         })
+      })
+
+      // Play video on hover
+      document.querySelectorAll('.project-card').forEach((card) => {
+        const video = card.querySelector('.project-demo-video')
+        if (video) {
+          card.addEventListener('mouseenter', () => {
+            video.play()
+          })
+          card.addEventListener('mouseleave', () => {
+            video.pause()
+            video.currentTime = 0
+          })
+        }
       })
     </script>
   </body>
