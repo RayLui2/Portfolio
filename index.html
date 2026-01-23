@@ -181,6 +181,28 @@
         <h2>Featured Projects</h2>
         <div class="projects-grid">
           <div class="project-card">
+            <div class="project-video">
+              <video autoplay loop muted playsinline>
+                <source src="videos/MediMindDemo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="project-content">
+              <h3>MediMind</h3>
+              <p>
+                A full-stack AI-powered healthcare assistant built with React,
+                TypeScript, and FastAPI. The platform features an intelligent
+                medical chatbot powered by Google's Gemini AI and LangGraph for
+                real-time health guidance, along with comprehensive tracking for
+                vital signs, medications, and symptoms. Users can manage their
+                complete health profile, visualize health trends with
+                interactive charts, and receive personalized insights. Built
+                with PostgreSQL for persistent conversation state and secure JWT
+                authentication for user data protection.
+              </p>
+            </div>
+          </div>
+          <div class="project-card">
             <div class="project-video pdf-thumbnail">
               <video autoplay loop muted playsinline>
                 <source src="videos/JigsawDemo.mp4" type="video/mp4" />
@@ -263,35 +285,6 @@
                 user hosts the server and the other connects as a client to
                 exchange messages.
               </p>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="project-image pdf-thumbnail">
-              <img src="images/DMM.png" alt="Digital MultiMeter" />
-              <div class="pdf-hover-overlay">
-                <button class="view-pdf-btn" data-pdf="assets/P2DMM.pdf">
-                  📄 View Report
-                </button>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Digital MultiMeter</h3>
-              <p>
-                A digital multimeter implementation using the STM32L476
-                NUCLEO-L467RG Development Board. The system measures AC and DC
-                voltages (0-3.3V), frequency, peak-to-peak voltage, and true RMS
-                voltage for various waveforms including sine, triangle,
-                sawtooth, and square waves. Measurements are displayed via USART
-                terminal with visual bar graphs, achieving accuracy within 10mV
-                for voltage and 1Hz for frequency.
-              </p>
-              <!-- Mobile button - BELOW content -->
-              <button
-                class="view-pdf-btn mobile-btn"
-                data-pdf="assets/P2DMM.pdf"
-              >
-                📄 View Report
-              </button>
             </div>
           </div>
         </div>
