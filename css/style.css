@@ -653,7 +653,12 @@ nav {
 .resume-actions {
   display: flex;
   justify-content: center;
+  gap: 1rem;
   margin-bottom: 2rem;
+}
+
+.resume-view-btn {
+  display: none;
 }
 
 .resume-viewer {
@@ -1018,6 +1023,14 @@ nav {
 
   .projects-grid {
     grid-template-columns: 1fr;
+  }
+
+  .resume-viewer {
+    display: none;
+  }
+
+  .resume-view-btn {
+    display: inline-block;
   }
 }
 
